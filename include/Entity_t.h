@@ -6,14 +6,15 @@
 #define INC_2D_ENGINE_ENTITY_T_H
 
 
-#include "vec3.hpp"
 #include "glad/glad.h"
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 #include "logging.h"
+#include "vec3.hpp"
 //#include "PhysicsEngine.h"
 
 #include "Shader.h"
+#include "Vector.h"
 
 class PhysicsEngine;
 class Entity_t {
@@ -22,20 +23,20 @@ private:
 
 public:
     double timer;
-    Shader* shader;
+    Shader *shader;
 
     class Physics {
     public:
         bool enabled = false;
-        PhysicsEngine* engine;
+        PhysicsEngine *engine;
     } physics;
 
     glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
-    Entity_t(Shader* shader);
-    Entity_t(Shader* shader, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    Entity_t(Shader *shader);
+    Entity_t(Shader *shader, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
     ~Entity_t();
 
@@ -47,4 +48,4 @@ public:
 };
 
 
-#endif //INC_2D_ENGINE_ENTITY_T_H
+#endif//INC_2D_ENGINE_ENTITY_T_H

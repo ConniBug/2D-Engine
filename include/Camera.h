@@ -11,12 +11,11 @@
 #define DEFAULT_SENSITIVITY 0.1f
 #define DEFAULT_ZOOM 45.0f
 
+#include "Vector.h"
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 #include "logging.h"
-#include "vec3.hpp"
-
 
 #include <iostream>
 
@@ -79,18 +78,21 @@ public:
 
     void HandleKeyboard(CameraMovement direction, double delta_time, bool sprinting = false) {
         float velocity = this->movement_speed * delta_time * (sprinting ? this->sprint_speed : 1.);
+        glm::vec3 move_by = glm::vec3(0.0f, 0.0f, 0.0f);
         if (direction == FORWARD) {
-            position += front * velocity;
+            glm::vec3 t = front * velocity;
+            move_by += t;
         }
         if (direction == BACKWARD) {
-            position -= front * velocity;
+            move_by -= (front * velocity);
         }
         if (direction == LEFT) {
-            position -= right * velocity;
+            move_by -= (right * velocity);
         }
         if (direction == RIGHT) {
-            position += right * velocity;
+            move_by += (right * velocity);
         }
+        this->position += move_by;
     }
 
     void HandleMouseMovement(float x_offset, float y_offset) {
@@ -143,7 +145,7 @@ public:
         //        front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
         this->front = glm::normalize(front);
 
-        this->right = glm::normalize(glm::cross(this->front, this->global_up));
+        this->right = glm::normalize(glm::cross(this->global_up, this->front));
         this->up = glm::normalize(glm::cross(this->right, this->front));
     }
 };

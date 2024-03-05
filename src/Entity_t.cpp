@@ -5,7 +5,7 @@
 #include "Entity_t.h"
 
 
-Entity_t::Entity_t(Shader* shader) {
+Entity_t::Entity_t(Shader *shader) {
     this->shader = shader;
     load();
 }
@@ -15,7 +15,7 @@ Entity_t::~Entity_t() {
     glDeleteBuffers(1, &VBO);
 }
 
-Entity_t::Entity_t(Shader* shader, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
+Entity_t::Entity_t(Shader *shader, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
     this->shader = shader;
 
     this->position = position;
@@ -71,15 +71,15 @@ void Entity_t::load() {
     };
 
     //        unsigned int indices[] = {  // note that we start from 0!
-//                0, 1, 3,   // first triangle
-//                1, 2, 3    // second triangle
-//        };
+    //                0, 1, 3,   // first triangle
+    //                1, 2, 3    // second triangle
+    //        };
 
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     //        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    //        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 
     glGenBuffers(1, &VBO);
@@ -87,7 +87,7 @@ void Entity_t::load() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) nullptr);
     glEnableVertexAttribArray(0);
 
     // color attribute
@@ -97,22 +97,23 @@ void Entity_t::load() {
     glBindVertexArray(0);
 
     //        // Set vertex attribute pointers
-//        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-//        glEnableVertexAttribArray(0);
+    //        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    //        glEnableVertexAttribArray(0);
 
-//        glUseProgram(shader_program_id);
-//        glBindVertexArray(VAO);
+    //        glUseProgram(shader_program_id);
+    //        glBindVertexArray(VAO);
 }
 
 void Entity_t::draw() {
     // Apply shader
-//    glUseProgram(shader->id);
+    //    glUseProgram(shader->id);
 
     glBindVertexArray(VAO);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
-    if(rotation.x != 0 || rotation.y != 0 || rotation.z != 0) {
+    if (rotation.x != 0 || rotation.y != 0 || rotation.z != 0) {
         auto normalized = glm::normalize(rotation);
+
         model = glm::rotate(model, glm::radians(glm::length(rotation)), normalized);
     }
     model = glm::scale(model, scale);
@@ -122,7 +123,19 @@ void Entity_t::draw() {
 
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
-
+    //    auto cnt = 0;
+    //    for (int x = 0; x < 230; ++x) {
+    //        for (int y = 0; y < 80; ++y) {
+    //            for (int z = 0; z < 35; ++z) {
+    //                ++cnt;
+    //                glm::vec3 offset = glm::vec3(x, y, z);
+    //                glUniform3fv(glGetUniformLocation(shader->id, "offset"), 1, &offset[0]);
+    //                glDrawArrays(GL_TRIANGLES, 0, 36);
+    //            }
+    //        }
+    //    }
+    //    logging::debug("Entity_t::draw() - instancing " + std::to_string(cnt) + " cubes");
+    glBindVertexArray(0);
 }
 
 void Entity_t::init() {

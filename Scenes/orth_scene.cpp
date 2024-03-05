@@ -3,15 +3,15 @@
 //
 
 #include "orth_scene.h"
-#include "logging.h"
+#include "Camera.h"
+#include "CollisionEngine.h"
+#include "DebugRendering/DebugBox.h"
+#include "DebugRendering/DebugLine.h"
+#include "PhysicsEngine.h"
+#include "glad/glad.h"
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
-#include "Camera.h"
-#include "glad/glad.h"
-#include "PhysicsEngine.h"
-#include "CollisionEngine.h"
-#include "DebugRendering.h"
-#include "DebugRendering/DebugBox.h"
+#include "logging.h"
 
 static DebugBox *box;
 void orth_scene::Init(Camera *camera) {
@@ -44,12 +44,12 @@ void orth_scene::Init(Camera *camera) {
 }
 
 void orth_scene::Update(double deltaTime) {
-//    std::cout << "orth_scene::update()" << std::endl;
+    //    std::cout << "orth_scene::update()" << std::endl;
 
 
     // create transformations
-    glm::mat4 view          = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-    glm::mat4 projection    = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);// make sure to initialize matrix to identity matrix first
+    glm::mat4 projection = glm::mat4(1.0f);
 
     projection = glm::ortho((storage->window.width / 2.0f), -(storage->window.width / 2.0f),
                             -(storage->window.height / 2.0f), (storage->window.height / 2.0f),
@@ -80,7 +80,7 @@ void orth_scene::Update(double deltaTime) {
                 entity->position.y = -(storage->window.height / 2);
         }
 
-//        entity->scale = glm::vec3(camera->fov * 7, 2.1f, 2.1f);
+        //        entity->scale = glm::vec3(camera->fov * 7, 2.1f, 2.1f);
 
         // And now im finally drawing the frame, if drew the frame
         //   before the collision we would see the blocks jittering and "glitching" up and down above y 0
@@ -91,7 +91,7 @@ void orth_scene::Update(double deltaTime) {
     // Render UI Elements
     {
 
-//        shaders[1]->apply();
+        //        shaders[1]->apply();
         draw_debug();
     }
 }

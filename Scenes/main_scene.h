@@ -15,9 +15,8 @@ class main_scene : public Scene {
 public:
     void Init(Camera *camera) override;
     void Update(double deltaTime) override;
-    void WindowResize(int width, int height) override;
     void HandleMouseMovement(float xoffset, float yoffset) override;
 };
 
 
-#endif //INC_2D_ENGINE_MAIN_SCENE_H
+#endif//INC_2D_ENGINE_MAIN_SCENE_H

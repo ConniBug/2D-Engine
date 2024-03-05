@@ -14,16 +14,16 @@ set(SOURCE_FILES
 
         src/window.cpp
         include/Window.h
-        src/Shader.cpp   include/Shader.h
-        src/logging.cpp  include/logging.h
-        src/vector.cpp   include/vector.h
+        src/Shader.cpp include/Shader.h
+        src/logging.cpp include/logging.h
+        src/Vector.cpp include/Vector.h
         src/Entity_t.cpp include/Entity_t.h
-        src/Camera.cpp   include/Camera.h
-        src/Storage.cpp  include/Storage.h
-        src/Scene.cpp    include/Scene.h
+        src/Camera.cpp include/Camera.h
+        src/Storage.cpp include/Storage.h
+        src/Scene.cpp include/Scene.h
 
-        src/PhysicsEngine.cpp  include/PhysicsEngine.h
-        Scenes/main_scene.cpp  Scenes/main_scene.h
+        src/PhysicsEngine.cpp include/PhysicsEngine.h
+        Scenes/main_scene.cpp Scenes/main_scene.h
 
         Scenes/orth_scene.cpp Scenes/orth_scene.h
 
