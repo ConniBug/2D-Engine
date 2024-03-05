@@ -2,17 +2,20 @@
 // Created by Conni Bilham on 10/07/2023.
 //
 
-#include <iostream>
+#include "Storage.h"
 #include "external/glad/include/glad/glad.h"
 #include "external/glfw/include/GLFW/glfw3.h"
-#include "Storage.h"
+#include <iostream>
 
 #include "include/Window.h"
 
 #include "Scenes/main_scene.h"
 #include "Scenes/orth_scene.h"
+#include "Scenes/star_viewer.h"
 
-Storage* storage;
+#include "include/Vector.h"
+
+Storage *storage;
 
 #define T_STR(v) std::to_string(storage->version.v)
 #define BUILD_STRING T_STR(major) + "." + T_STR(minor) + "." + T_STR(patch) + " Build " + T_STR(build)
@@ -26,12 +29,12 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);             // For Mac OS X
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);// For Mac OS X
 
-
-    storage->window.title = "";
-    storage->scene_list.emplace_back(new orth_scene());
+    storage->window.title = "Engine " + BUILD_STRING;
     storage->scene_list.emplace_back(new main_scene());
+    storage->scene_list.emplace_back(new star_viewer());
+    storage->scene_list.emplace_back(new orth_scene());
 
     auto camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
     storage->window.width = 800;
